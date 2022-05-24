@@ -4,6 +4,10 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import asyncHandler from 'express-async-handler';
+import cookieParser from 'cookie-parser';
+
+// importing routers
+import userRouter from './routers/users.js';
 
 // env variables
 dotenv.config({});
@@ -12,9 +16,13 @@ dotenv.config({});
 const app = express();
 
 // using middlewares
-app.use(cors());
-app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(cors());
+app.use(cookieParser());
+
+// using routers
+app.use('/api/users', userRouter);
 
 // stop script and display message if the port is not defined
 if (!process.env.PORT) throw new Error('Port is not defined.');
