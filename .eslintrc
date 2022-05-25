@@ -5,6 +5,7 @@
         "indent": "off",
         "no-unused-vars": "warn",
         "comma-dangle": "off",
-        "import/extensions": "off"
+        "import/extensions": "off",
+        "no-useless-catch": "off"
     }
 }

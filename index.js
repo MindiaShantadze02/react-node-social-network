@@ -8,6 +8,7 @@ import cookieParser from 'cookie-parser';
 
 // importing routers
 import userRouter from './routers/users.js';
+import postsRouter from './routers/posts.js';
 
 // env variables
 dotenv.config({});
@@ -23,6 +24,7 @@ app.use(cookieParser());
 
 // using routers
 app.use('/api/users', userRouter);
+app.use('/api/posts', postsRouter);
 
 // stop script and display message if the port is not defined
 if (!process.env.PORT) throw new Error('Port is not defined.');

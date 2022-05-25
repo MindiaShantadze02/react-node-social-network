@@ -59,28 +59,28 @@ export const login = asyncHandler(async (req, res, next) => {
 // @desc for getting all users list
 // @method GET /api/users
 export const getUsers = asyncHandler(async (req, res, next) => {
-    const users = await User.find({});
-    const usersCount = await User.countDocuments();
-    res.status(200).json({
-        count: usersCount,
-        users
-    });
+    res.status(200).json(res.paginatedResults);
 });
 
 // @desc for getting a single user
 // @method GET /api/users/:id
 export const getUser = asyncHandler(async (req, res, next) => {
-    res.status(200).json('Get Single User');
+    const user = await User.findById(req.params.id);
+    res.status(200).json(user);
 });
 
 // @desc for updating an user
 // @method PUT /api/users/:id
 export const updateUser = asyncHandler(async (req, res, next) => {
-    res.status(200).json('Update An User');
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+        runValidators: true
+    });
+    res.status(201).json(updatedUser);
 });
 
 // @desc for deleting an user
 // @method delete /api/users/:id
 export const deleteUser = asyncHandler(async (req, res, next) => {
-    res.status(200).json('Delete An User');
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    res.status(200).json(deletedUser);
 });
