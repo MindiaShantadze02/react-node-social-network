@@ -39,8 +39,8 @@ router.get('/:postId', auth, getPost);
 
 // crud operations on logged in users posts
 router.route('/:postId')
-    .put(auth, verifyUser, updatePost)
-    .delete(auth, verifyUser, deletePost);
+    .put(auth, updatePost)
+    .delete(auth, deletePost);
 
 // exporting router
 export default router;
