@@ -10,6 +10,7 @@ import cookieParser from 'cookie-parser';
 import userRouter from './routers/users.js';
 import postsRouter from './routers/posts.js';
 import commentsRouter from './routers/comments.js';
+import errorHandler from './middleware/errorHandler.js';
 
 // env variables
 dotenv.config({});
@@ -27,6 +28,9 @@ app.use(cookieParser());
 app.use('/api/users', userRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/comments', commentsRouter);
+
+// middleware for handling errors
+app.use(errorHandler);
 
 // stop script and display message if the port is not defined
 if (!process.env.PORT) throw new Error('Port is not defined.');

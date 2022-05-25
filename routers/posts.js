@@ -1,12 +1,13 @@
 // importing dependencies
 import express from 'express';
 
+import Post from '../models/Post.js';
+
 // importing middlewares
 import {
-    auth,
-    verifyUser,
-    isAdmin
+    auth
 } from '../middleware/auth.js';
+import verify from '../middleware/verify.js';
 
 // importing controllers
 import {
@@ -39,8 +40,8 @@ router.get('/:postId', auth, getPost);
 
 // crud operations on logged in users posts
 router.route('/:postId')
-    .put(auth, updatePost)
-    .delete(auth, deletePost);
+    .put(auth, verify(Post, 'postId'), updatePost)
+    .delete(auth, verify(Post, 'postId'), deletePost);
 
 // exporting router
 export default router;

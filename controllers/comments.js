@@ -37,5 +37,5 @@ export const updateComment = asyncHandler(async (req, res, next) => {
 // @method DELETE /api/comments/:commentId
 export const deleteComment = asyncHandler(async (req, res, next) => {
     const deletedComment = await Comment.findByIdAndDelete(req.params.commentId);
-    res.status(201).json(deleteComment);
+    res.status(201).json(deletedComment);
 });

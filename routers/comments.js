@@ -1,6 +1,13 @@
 // importing dependencies
 import express from 'express';
 
+// importing models
+import Comment from '../models/Comment.js';
+
+// importing middlewares
+import { auth } from '../middleware/auth.js';
+import verify from '../middleware/verify.js';
+
 // importing controllers
 import {
     getPostComments,
@@ -14,12 +21,12 @@ const router = express.Router();
 
 // endpoint for getting and creating post comments
 router.route('/:postId')
-    .get(getPostComments)
-    .post(createPostComment);
+    .get(auth, getPostComments)
+    .post(auth, createPostComment);
 
 router.route('/:commentId')
-    .put(updateComment)
-    .delete(deleteComment);
+    .put(auth, verify(Comment, 'commentId'), updateComment)
+    .delete(auth, verify(Comment, 'commentId'), deleteComment);
 
 // exporting router
 export default router;

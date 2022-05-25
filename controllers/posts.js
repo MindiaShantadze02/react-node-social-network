@@ -52,7 +52,8 @@ export const updatePost = asyncHandler(async (req, res, next) => {
 // @desc function for deleting a post
 // @method DELETE /api/posts/:postId
 export const deletePost = asyncHandler(async (req, res, next) => {
-    const deletedPost = await Post.findByIdAndDelete(req.params.id);
+    await Post.findByIdAndDelete(req.params.postId);
     await Comment.deleteMany({ userId: req.user.id, postId: req.params.postId });
-    res.status(201).json(deletedPost);
+
+    res.status(201).json('Post deleted successfully');
 });
